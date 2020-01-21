@@ -2,7 +2,7 @@
 // Only the compilation success is tested. We don’t emit any JS from the
 // code below and don't execute it.
 
-import {Router} from '@vaadin/router';
+import {Router, RouterViewMixin} from '@vaadin/router';
 
 const outlet: Node = document.body.firstChild as Node;
 
@@ -155,3 +155,23 @@ router.setOutlet(null);
 
 // getOutlet
 expectTypeOfValue<Node | null>(router.getOutlet());
+
+//Create a view with RouterView
+class MyView extends RouterViewMixin(HTMLElement) implements RouterLifecycle {
+  constructor() {
+    super();
+  }
+
+  onBeforeLeave(location: Router.Location, commands: Router.Commands) {
+    location.baseUrl;
+    commands.prevent;
+    router.baseUrl;
+    this.location;
+    this.localName;
+  }
+}
+customElements.define('my-view', MyView);
+
+router.setRoutes([
+  {path: '/go', component: 'my-view'}
+]);

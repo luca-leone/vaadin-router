@@ -1,2 +1,4 @@
-export {Router} from './src/router-config.js';
-export {default as Resolver} from './src/resolver/resolver.js';
+export { Router, RouterViewMixin }
+from './src/router-config.js';
+export { default as Resolver }
+from './src/resolver/resolver.js';

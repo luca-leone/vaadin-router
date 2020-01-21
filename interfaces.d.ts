@@ -5,8 +5,21 @@
 // This file is supplemental, it only covers the types missing from
 // the generated declarations.
 
-declare class Router {
+declare interface RouterLifecycle {
+  onBeforeLeave?: (
+    location: Router.Location,
+    commands: Router.Commands
+  ) => void | Router.PreventResult | Router.RedirectResult | Promise<void | Router.PreventResult | Router.RedirectResult>;
+  // onBeforeEnter?: (location: Location, commands: Commands, router: Router) => Promise | Prevent | Redirect | void;
+  // onAfterLeave?: (location: Location, commands: Commands, router: Router) => void;
+  // onAfterEnter?: (location: Location, commands: Commands, router: Router) => void;
 }
+
+declare function RouterViewMixin<T extends HTMLElement>(
+  superClass: {new(): T}
+): {new(): T & {
+  location: Router.Location;
+}};
 
 declare namespace Router {
   class NotFoundResult {
